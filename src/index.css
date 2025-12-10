@@ -1,0 +1,69 @@
+.message {
+  border: 'solid';
+  padding: 10px;
+  border-width: 5px;
+}
+.blogStyle {
+  padding-top: 10px;
+  padding-left: 2px;
+  border: solid;
+  border-width: 1px;
+  margin-bottom: 5px;
+}
+.delete {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete:hover {
+  background-color: darkred;
+}
+.view {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.like {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.view:hover {
+  background-color: rgba(15, 15, 15, 0.664);
+}
+.like:hover {
+  background-color: darkblue;
+}
+.button {
+  background-color: lightgrey;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.loginform {
+  padding: 10px;
+  border: solid;
+  border-width: 1px;
+  margin-bottom: 5px;
+  display: block;
+}
+.blogform {
+  padding: 10px;
+  border: solid;
+  border-width: 1px;
+  margin-bottom: 5px;
+  display: block;
+}

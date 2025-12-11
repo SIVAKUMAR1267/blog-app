@@ -50,7 +50,7 @@ test.describe('Blog Application - Authentication', () => {
     await page.waitForTimeout(3000)
     const usernameInput = page.locator('input[name="Username"]')
     const passwordInput = page.locator('input[name="Password"]')
-    
+
     await usernameInput.fill('testuser')
     await passwordInput.fill('password123')
 
@@ -73,7 +73,7 @@ test.describe('Blog Application - Authentication', () => {
     await page.waitForTimeout(2000)
     const errorElement = page.locator('text=wrong username or password')
     const isVisible = await errorElement.isVisible().catch(() => false)
-    
+
     if (isVisible) {
       await expect(errorElement).toBeVisible()
     }

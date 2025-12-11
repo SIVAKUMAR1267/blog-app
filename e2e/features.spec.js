@@ -129,11 +129,11 @@ test.describe('Blog Application - Responsive Design', () => {
     // On mobile, BLOGS header is hidden, check for hamburger menu or content
     const hamburgerMenu = page.locator('button[aria-label="account of current user"]')
     const appContent = page.locator('h2')
-    
+
     // Either hamburger menu or content should be visible
     const menuVisible = await hamburgerMenu.isVisible().catch(() => false)
     const contentVisible = await appContent.isVisible().catch(() => false)
-    
+
     expect(menuVisible || contentVisible).toBeTruthy()
   })
 
@@ -148,12 +148,12 @@ test.describe('Blog Application - Responsive Design', () => {
     const blogsHeader = page.locator('a:has-text("BLOGS")')
     const hamburgerMenu = page.locator('button[aria-label="account of current user"]')
     const appContent = page.locator('h2')
-    
+
     // Either header or content should be visible
     const headerVisible = await blogsHeader.isVisible().catch(() => false)
     const menuVisible = await hamburgerMenu.isVisible().catch(() => false)
     const contentVisible = await appContent.isVisible().catch(() => false)
-    
+
     expect(headerVisible || menuVisible || contentVisible).toBeTruthy()
   })
 

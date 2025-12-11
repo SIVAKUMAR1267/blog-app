@@ -35,6 +35,6 @@ export default [
     },
   },
   {
-    ignores: ['dist/**','eslint.config.mjs','.eslintignore','webpack.config.js','.eslintrc.js', 'src/**/*.jsx'],
+    ignores: ['dist/**','eslint.config.mjs','.eslintignore','webpack.config.js','.eslintrc.js', 'src/**/*.jsx', 'e2e/**'],
   },
 ]

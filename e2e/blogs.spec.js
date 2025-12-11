@@ -76,7 +76,7 @@ test.describe('Blog Application - Blog Management', () => {
 
     if (linkCount > 0) {
       await blogLinks.first().click()
-      
+
       // Wait for blog details page to load
       await page.waitForTimeout(1000)
 
@@ -129,7 +129,7 @@ test.describe('Blog Application - Blog Management', () => {
       const commentInput = page.locator('input[name="comments"]')
       if (await commentInput.isVisible()) {
         await commentInput.fill('This is a test comment')
-        
+
         const submitButton = page.locator('button:has-text("add comment")')
         if (await submitButton.isVisible()) {
           await submitButton.click()
@@ -171,9 +171,9 @@ test.describe('Blog Application - Blog Management', () => {
     if (likeButtonExists) {
       const initialText = await likeButton.textContent()
       await likeButton.click()
-      
+
       await page.waitForTimeout(1000)
-      
+
       const finalText = await likeButton.textContent()
       // Button should still be visible after click
       expect(await likeButton.isVisible()).toBeTruthy()

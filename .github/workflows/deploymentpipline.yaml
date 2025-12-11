@@ -28,7 +28,7 @@ jobs:
         run: |
           npm start &
           sleep 10
-          npx playwright
+          npm install playwright
           npm run test:e2e
       
       - name: Send Discord notification

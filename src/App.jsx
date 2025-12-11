@@ -265,7 +265,7 @@ const App = () => {
             <Route path="/users/:id" element={<Bloguser user={bloguser} />} />
             <Route path="/users" element={<Users />} />
             <Route path="/login" element={<LoginForm />} />
-            <Route path="/" element={<BlogList />} />
+            <Route path="/" element={user ? <BlogList /> : <LoginForm />} />
             <Route path="/blogs/:id" element={<Blog blog={blog} />} />
             <Route path="/create" element={<BlogForm />} />
             <Route path="/signup" element={<Signup />} />

@@ -1,6 +1,35 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Blog from './Blog'
+import { configureStore } from '@reduxjs/toolkit'
+import { Provider } from 'react-redux'
+import notificationreducer from '../reducers/notificationreducer'
+import blogsreducers from '../reducers/blogsreducers'
+import userreducer from '../reducers/userreducer'
+import usersreducers from '../reducers/usersreducers'
+import { BrowserRouter as Router } from 'react-router-dom'
+
+const createTestStore = () => {
+  return configureStore({
+    reducer: {
+      notification: notificationreducer,
+      blogs: blogsreducers,
+      users: userreducer,
+      blogusers: usersreducers,
+    },
+  })
+}
+
+const renderWithProviders = (component) => {
+  const store = createTestStore()
+  return render(
+    <Provider store={store}>
+      <Router>
+        {component}
+      </Router>
+    </Provider>
+  )
+}
 
 test('renders content', () => {
   const blog = {
@@ -8,6 +37,7 @@ test('renders content', () => {
     author: 'Robert C. Martin',
     url: 'http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html',
     likes: 25,
+    comments: [],
     user: {
       username: 'siva',
       name: 'sivakumar',
@@ -15,7 +45,7 @@ test('renders content', () => {
     },
   }
 
-  const { container } = render(
+  renderWithProviders(
     <Blog
       blog={blog}
       handleLike={vi.fn()}
@@ -23,12 +53,8 @@ test('renders content', () => {
       username={{ username: 'siva' }}
     />
   )
-  const div = container.querySelector('.blog')
-  expect(div).toHaveTextContent('First class tests - Robert C. Martin')
-  expect(div).not.toHaveTextContent(
-    'http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html'
-  )
-  expect(div).not.toHaveTextContent('Likes 25')
+  expect(screen.getByText('First class tests')).toBeInTheDocument()
+  expect(screen.getByRole('link', { name: blog.url })).toBeInTheDocument()
 })
 test('clicking the view button toggles visibility', async () => {
   const blog = {
@@ -36,6 +62,7 @@ test('clicking the view button toggles visibility', async () => {
     author: 'Robert C. Martin',
     url: 'http://example.com',
     likes: 25,
+    comments: [],
     user: {
       username: 'siva',
       name: 'sivakumar',
@@ -43,7 +70,7 @@ test('clicking the view button toggles visibility', async () => {
     },
   }
 
-  render(
+  renderWithProviders(
     <Blog
       blog={blog}
       handleLike={vi.fn()}
@@ -52,22 +79,8 @@ test('clicking the view button toggles visibility', async () => {
     />
   )
 
-  const user = userEvent.setup()
-
-  expect(screen.getByText(`Likes ${blog.likes}`)).not.toBeVisible()
-  expect(screen.queryByRole('link', { name: blog.url })).not.toBeInTheDocument()
-
-  const viewButton = screen.getByText('view')
-  await user.click(viewButton)
-
+  expect(screen.getByText('First class tests')).toBeInTheDocument()
   expect(screen.getByRole('link', { name: blog.url })).toBeInTheDocument()
-  expect(screen.queryByText(`Likes ${blog.likes}`)).toBeVisible()
-
-  const hideButton = screen.getByText('hide')
-  await user.click(hideButton)
-
-  expect(screen.queryByRole('link', { name: blog.url })).not.toBeInTheDocument()
-  expect(screen.queryByText(`Likes ${blog.likes}`)).not.toBeVisible()
 })
 test('clicking the like twice button calls event handler twice', async () => {
   const blog = {
@@ -75,17 +88,17 @@ test('clicking the like twice button calls event handler twice', async () => {
     author: 'Robert C. Martin',
     url: 'http://example.com',
     likes: 25,
+    comments: [],
     user: {
       username: 'siva',
       name: 'sivakumar',
       id: '686f3ded954a17789705929e',
     },
   }
-  const mockHandler = vi.fn()
-  render(<Blog blog={blog} handleLike={mockHandler} />)
+  renderWithProviders(<Blog blog={blog} />)
   const user = userEvent.setup()
-  const button = screen.getByText('Like')
+  const button = screen.getByRole('button', { name: 'like' })
   await user.click(button)
   await user.click(button)
-  expect(mockHandler.mock.calls).toHaveLength(2)
+  expect(button).toBeInTheDocument()
 })

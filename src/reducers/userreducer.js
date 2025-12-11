@@ -28,7 +28,7 @@ export const loginuser = (username, password) => {
   }
 }
 
-export const setuserfromlocalstorage = (user) => {
+export const setuserfromlocalstorage = () => {
   return async (dispatch) => {
     const loggedUserJSON = window.localStorage.getItem('loggedblogappUser')
     if (loggedUserJSON) {

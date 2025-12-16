@@ -23,6 +23,15 @@ jobs:
       
       - name: unit tests
         run: npm run test
+
+      - name: e2etest
+        run: |
+          npm start &
+          sleep 10
+          cd e2e
+          npm ci
+          npx playwright install --with-deps
+          npx playwright test
       
       - name: Send Discord notification
         if: ${{ success() }}

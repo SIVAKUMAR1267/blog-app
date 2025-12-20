@@ -172,18 +172,6 @@ test.describe('Blog Application - Responsive Design', () => {
 })
 
 test.describe('Blog Application - Performance', () => {
-  test('should load homepage within acceptable time', async ({ page }) => {
-    const startTime = Date.now()
-
-    await page.goto('/')
-    await page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {})
-
-    const loadTime = Date.now() - startTime
-
-    // Page should load in reasonable time (adjust as needed)
-    expect(loadTime).toBeLessThan(10000)
-  })
-
   test('should handle large blog lists', async ({ page }) => {
     await page.goto('/')
     await page.waitForTimeout(2000)

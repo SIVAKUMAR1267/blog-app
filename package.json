@@ -4,8 +4,10 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"npm run dev-client\" \"npm run dev-server\"",
+    "start:test": "concurrently \"npm run dev-client\" \"npm run dev-server:test\"",
     "dev-client": "webpack-dev-server --open --mode development",
-    "dev-server": "node app.js",
+    "dev-server": "cross-env NODE_ENV=development node app.js",
+    "dev-server:test": "cross-env NODE_ENV=test node app.js",
     "start-prod": "node app.js",
     "lint": "eslint .",
     "preview": "vite preview",

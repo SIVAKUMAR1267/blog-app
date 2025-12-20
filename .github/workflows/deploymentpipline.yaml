@@ -26,8 +26,6 @@ jobs:
 
       - name: e2etest
         run: |
-          npm start &
-          sleep 10
           cd e2e
           npm ci
           npx playwright install --with-deps
@@ -49,7 +47,6 @@ jobs:
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           title: "CHECKS FAILED"
-          color: "FF0000"
           message: "One or more checks have failed for commit ${{ github.sha }} on branch ${{ github.ref }}. Please check the GitHub Actions logs for more details."
           include_image: true
           avatar_url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png

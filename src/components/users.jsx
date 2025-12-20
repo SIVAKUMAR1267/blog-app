@@ -13,8 +13,8 @@ import {
 
 const Users = () => {
   const users = useSelector((state) => state.blogusers)
-  if (!users) {
-    return null
+  if (!users || users.length === 0) {
+    return <h3>No users found</h3>
   }
 
   return (

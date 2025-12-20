@@ -6,8 +6,8 @@
 /**
  * Login a user
  * @param {Page} page - Playwright page object
- * @param {string} username - Username to login with
- * @param {string} password - Password to login with
+ * @param {siva} username - Username to login with
+ * @param {test} password - Password to login with
  * @returns {Promise<boolean>} - True if login was successful
  */
 export async function loginUser(page, username, password) {
